@@ -1,0 +1,25 @@
+{
+  "name": "@netofficefw/playwright-internal",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Framework for automated tests of Microsoft Office apps and add-ins.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NetOfficeFw/playwright.git"
+  },
+  "homepage": "https://netoffice.io/playwright",
+  "engines": {
+    "node": ">=18"
+  },
+  "author": "Cisco Systems, Inc.",
+  "contributors": [
+    "Jozef Izso"
+  ],
+  "license": "Apache-2.0",
+  "scripts": {},
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+  }
+}
