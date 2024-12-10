@@ -1,0 +1,5 @@
+NetOfficeFw Playwright
+Copyright © 2024 Cisco Systems, Inc. All rights reserved.
+
+This software contains code derived from the Playwright project (https://github.com/microsoft/playwright/),
+available under the Apache 2.0 license (https://github.com/microsoft/playwright/blob/main/LICENSE).
