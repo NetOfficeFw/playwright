@@ -1,0 +1,11 @@
+{
+  "name": "@netofficefw/example-powerpoint-app",
+  "version": "1.0.0",
+  "scripts": {},
+  "keywords": [],
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@playwright/test": "^1.49.1",
+    "@types/node": "^18"
+  }
+}
