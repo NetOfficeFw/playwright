@@ -2,7 +2,7 @@
   "name": "@netofficefw/playwright-internal",
   "private": true,
   "version": "0.1.0",
-  "description": "Framework for automated tests of Microsoft Office apps and add-ins.",
+  "description": "Core library for communication with NetOffice DevTools Addin.",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/NetOfficeFw/playwright.git"
@@ -16,11 +16,14 @@
     "Jozef Izso"
   ],
   "license": "Apache-2.0",
-  "scripts": {},
-  "workspaces": [
-    "packages/*"
-  ],
-  "devDependencies": {
-    "@playwright/test": "1.49.1"
+  "exports": {
+    ".": {
+      "import": "./index.mjs",
+      "default": "./index.mjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "peerDependencies": {
+    "@playwright/test": "^1.49.1"
   }
 }
