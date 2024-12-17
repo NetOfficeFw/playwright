@@ -19,8 +19,10 @@ export class PowerPointAppProviderImpl implements api.PowerPointAppProvider {
     this.#port = port;
   }
 
-  connectOverGrpc(endpointURL: string): Promise<api.PowerPointApp> {
-    throw new Error('Method not implemented.');
+  async connectOverGrpc(endpointURL: string): Promise<api.PowerPointApp> {
+    const app = new PowerPointApp();
+    await app.connectOverGrpc(endpointURL);
+    return app;
   }
 
   async launch(): Promise<api.PowerPointApp> {
@@ -42,8 +44,7 @@ export class PowerPointAppProviderImpl implements api.PowerPointAppProvider {
         setTimeout(() => resolve(), 500);
     }));
 
-    const app = new PowerPointApp();
-    await app.connectOverGrpc(`http://127.0.0.1:${this.#port}`);
+    const app = await this.connectOverGrpc(`http://127.0.0.1:${this.#port}`);
     return app;
   }
 }
