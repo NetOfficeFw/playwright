@@ -1,0 +1,1 @@
+{"root":["./packages/playwright-mso-core/index.ts","./packages/playwright-mso-core/src/powerpoint.ts","./packages/playwright-mso-core/src/server/powerpointappproviderimpl.ts","./packages/playwright-mso-core/types/index.ts"],"version":"5.7.2"}

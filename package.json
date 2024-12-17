@@ -16,12 +16,20 @@
     "Jozef Izso"
   ],
   "license": "Apache-2.0",
-  "scripts": {},
+  "scripts": {
+    "build": "tsc --build",
+    "clean": "tsc --build --clean"
+  },
   "workspaces": [
     "packages/*"
   ],
   "devDependencies": {
     "@playwright/test": "1.49.1",
-    "@types/node": "^18.19.68"
+    "@types/node": "^18.19.68",
+    "typescript": "^5.7.2"
+  },
+  "dependencies": {
+    "@grpc/grpc-js": "^1.12.4",
+    "ulid": "^2.3.0"
   }
 }
