@@ -28,6 +28,10 @@ export const test = base.extend<PowerPointTestFixture, PowerPointWorkerFixture>(
   },
   presentation: async ({ powerpoint }, use) => {
     const presentation = await powerpoint.newPresentation();
+    if (presentation === null) {
+      throw new Error('Failed to create new presentation.');
+    }
+
     await use(presentation);
   },
 });

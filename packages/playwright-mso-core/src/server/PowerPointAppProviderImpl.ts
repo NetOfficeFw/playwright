@@ -85,8 +85,16 @@ class PowerPointApp implements api.PowerPointApp {
     return this.#version;
   }
 
-  newPresentation(): Promise<api.Presentation> {
-    throw new Error('Method not implemented.');
+  async newPresentation(): Promise<api.Presentation | null> {
+    const newPresentationEndpoint = `${this.#endpoint}/newPresentation`;
+    const response = await fetch(newPresentationEndpoint, { method: 'POST' });
+    if (response.ok) {
+      var data = await response.json();
+      console.log(data);
+      return new Presentation(data.title, data.fullname);
+    }
+
+    return null;
   }
 
   async close(): Promise<void> {
@@ -99,5 +107,23 @@ class PowerPointApp implements api.PowerPointApp {
 
   async [Symbol.asyncDispose](): Promise<void> {
     console.log('Disposing PowerPoint channel.');
+  }
+}
+
+class Presentation implements api.Presentation {
+  #title: string;
+  #fullname: string;
+
+  constructor(title: string, fullname: string) {
+    this.#title = title;
+    this.#fullname = fullname;
+  }
+
+  async title(): Promise<string> {
+    return this.#title;
+  }
+
+  async fullname(): Promise<string> {
+    return this.#fullname;
   }
 }

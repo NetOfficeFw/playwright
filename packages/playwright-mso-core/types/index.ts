@@ -12,7 +12,7 @@ export interface PowerPointApp {
 
   version(): string;
 
-  newPresentation(): Promise<Presentation>;
+  newPresentation(): Promise<Presentation | null>;
 
   close(): Promise<void>;
   [Symbol.asyncDispose](): Promise<void>;
@@ -20,4 +20,5 @@ export interface PowerPointApp {
 
 export interface Presentation {
   title(): Promise<string>;
+  fullname(): Promise<string>;
 }
