@@ -8,3 +8,16 @@ test('test presentation', async ({ presentation }) => {
   const title = await presentation.title();
   await expect(title).toEqual('Presentation1.pptx');
 });
+
+
+test('Prepare PowerPoint presentation using JavaScript code', async ({ presentation }) => {
+  // create one slide in the presentation
+  await presentation.evaluate(({ application, presentation }) => {
+    const slide = presentation.Slides.Add(1, PpSlideLayout.ppLayoutBlank);
+    const textbox = slide.Shapes.AddTextbox(MsoTextOrientation.msoTextOrientationHorizontal, 100, 100, 600, 100);
+    textbox.TextFrame.TextRange.Text = `Slide ${slide.SlideID} in PowerPoint ${application.Build}`;
+  });
+
+  const title = await presentation.title();
+  await expect(title).toEqual('Presentation1.pptx');
+});

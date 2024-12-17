@@ -91,7 +91,7 @@ class PowerPointApp implements api.PowerPointApp {
     if (response.ok) {
       var data = await response.json();
       console.log(data);
-      return new Presentation(data.title, data.fullname);
+      return new Presentation(this.#endpoint, data.title, data.fullname);
     }
 
     return null;
@@ -111,10 +111,12 @@ class PowerPointApp implements api.PowerPointApp {
 }
 
 class Presentation implements api.Presentation {
+  #endpoint: string;
   #title: string;
   #fullname: string;
 
-  constructor(title: string, fullname: string) {
+  constructor(endpoint: string, title: string, fullname: string) {
+    this.#endpoint = endpoint;
     this.#title = title;
     this.#fullname = fullname;
   }
@@ -125,5 +127,15 @@ class Presentation implements api.Presentation {
 
   async fullname(): Promise<string> {
     return this.#fullname;
+  }
+
+  async evaluate(script: api.PageFunction): Promise<void> {
+    const scriptText = script.toString();
+
+    const evaluateEndpoint = `${this.#endpoint}/evaluate`;
+    const response = await fetch(evaluateEndpoint, { method: 'POST', body: scriptText, headers: { 'Content-Type': 'text/javascript' } });
+    if (response.ok) {
+      console.log('Script was evaluated.');
+    }
   }
 }

@@ -18,7 +18,22 @@ export interface PowerPointApp {
   [Symbol.asyncDispose](): Promise<void>;
 }
 
+export type PresentationEvaluateArgs = {
+  application?: any,
+  presentation?: any
+}
+
+export type PageFunction = ((args: PresentationEvaluateArgs) => void | Promise<void>);
+
 export interface Presentation {
   title(): Promise<string>;
   fullname(): Promise<string>;
+
+  evaluate(script: PageFunction): Promise<void>;
+}
+
+
+export enum msoTextOrientation {
+  Horizontal = 1,
+  Vertical = 5
 }
