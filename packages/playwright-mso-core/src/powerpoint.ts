@@ -20,11 +20,11 @@ export const test = base.extend<PowerPointTestFixture, PowerPointWorkerFixture>(
     const port = 53080;
     var provider = new PowerPointAppProviderImpl(sessionId, port);
 
-    // const powerpoint = await provider.launch();
-    const powerpoint = await provider.connectOverGrpc(`http://127.0.0.1:${port}`);
+    const powerpoint = await provider.launch();
+    // const powerpoint = await provider.connectOverGrpc(`http://127.0.0.1:${port}`);
 
     await use(powerpoint);
-    // await powerpoint.close();
+    await powerpoint.close();
   },
   presentation: async ({ powerpoint }, use) => {
     const presentation = await powerpoint.newPresentation();

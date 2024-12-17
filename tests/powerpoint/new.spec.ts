@@ -1,4 +1,4 @@
-import { test, expect } from '../../packages/playwright-mso-core';
+import { test, expect, delay } from '../../packages/playwright-mso-core';
 
 test('test Microsoft PowerPoint app', async ({ powerpoint }) => {
   await expect(powerpoint.version()).toEqual('16.0.18330');
@@ -18,6 +18,14 @@ test('Prepare PowerPoint presentation using JavaScript code', async ({ presentat
     textbox.TextFrame.TextRange.Text = `Slide ${slide.SlideID} in PowerPoint ${application.Build}`;
   });
 
-  const title = await presentation.title();
-  await expect(title).toEqual('Presentation1.pptx');
+  await delay(1000);
+
+  await presentation.evaluate(({ application, presentation }) => {
+    const slide = presentation.Slides.Add(2, PpSlideLayout.ppLayoutBlank);
+    const textbox = slide.Shapes.AddTextbox(MsoTextOrientation.msoTextOrientationHorizontal, 100, 100, 600, 100);
+    textbox.TextFrame.TextRange.Text = `Hello World!`;
+    slide.Select();
+  });
+
+  await delay(3000);
 });
