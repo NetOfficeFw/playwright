@@ -90,7 +90,7 @@ class PowerPointApp implements api.PowerPointApp {
     const response = await fetch(newPresentationEndpoint, { method: 'POST' });
     if (response.ok) {
       var data = await response.json();
-      console.log(data);
+      // console.log(data);
       return new Presentation(this.#endpoint, data.title, data.fullname);
     }
 
@@ -101,7 +101,7 @@ class PowerPointApp implements api.PowerPointApp {
     const closeEndpoint = `${this.#endpoint}/close`;
     const response = await fetch(closeEndpoint, { method: 'POST' });
     if (response.ok) {
-      console.log(await response.json());
+      // console.log(await response.json());
     }
   }
 
@@ -135,7 +135,7 @@ class Presentation implements api.Presentation {
     const evaluateEndpoint = `${this.#endpoint}/evaluate`;
     const response = await fetch(evaluateEndpoint, { method: 'POST', body: scriptText, headers: { 'Content-Type': 'text/javascript' } });
     if (response.ok) {
-      console.log('Script was evaluated.');
+      // console.log('Script was evaluated.');
     }
   }
 }

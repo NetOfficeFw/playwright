@@ -5,6 +5,7 @@
     "lib": ["esnext", "dom", "DOM.Iterable"],
     "baseUrl": ".",
     "paths": {
+      "*": ["./packages/playwright-mso-core/types/*.d.ts"],
       "playwright-core/lib/*": ["./packages/playwright-mso-core/src/*"],
     },
     "esModuleInterop": true,
@@ -17,7 +18,10 @@
     "skipLibCheck": true,
   },
   "compileOnSave": true,
-  "include": ["packages"],
+  "include": [
+    "packages",
+    "types/global.d.ts"
+  ],
   "exclude": [
     "packages/*/lib",
   ]
