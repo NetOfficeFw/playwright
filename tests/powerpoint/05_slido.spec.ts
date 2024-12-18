@@ -12,9 +12,10 @@ test.describe('PowerPoint with Slido poll', () => {
     await expect(title).toEqual('Slido');
 
     await page.getByTestId('card-clickable-overlay').nth(5).click();
+    await delay(1000);
     await page.getByTestId('pollQuestionTitle').fill('Word cloud poll');
     await page.getByTestId('submitPollFormButton').click();
 
-    await delay(3000);
+    await delay(5000);
   })
 });
