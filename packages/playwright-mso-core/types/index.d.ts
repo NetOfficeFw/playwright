@@ -30,6 +30,8 @@ export interface Presentation {
   fullname(): Promise<string>;
 
   evaluate(script: PageFunction): Promise<void>;
+
+  click(msoId: string): Promise<void>;
 }
 
 

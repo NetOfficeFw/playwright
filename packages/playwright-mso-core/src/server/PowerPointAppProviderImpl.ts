@@ -69,7 +69,7 @@ class PowerPointApp implements api.PowerPointApp {
     const response = await fetch(getVersion);
     if (response.ok) {
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
 
       this.#appType = data.app_type;
       this.#version = data.version;
@@ -137,5 +137,10 @@ class Presentation implements api.Presentation {
     if (response.ok) {
       // console.log('Script was evaluated.');
     }
+  }
+
+  async click(msoId: string): Promise<void> {
+    const evaluateEndpoint = `${this.#endpoint}/click/${msoId}`;
+    const response = await fetch(evaluateEndpoint, { method: 'POST' });
   }
 }
