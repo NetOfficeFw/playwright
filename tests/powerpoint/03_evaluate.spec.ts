@@ -9,16 +9,17 @@ test('Prepare PowerPoint presentation using JavaScript code', async ({ presentat
     textbox.TextFrame.TextRange.Text = `Slide ${slide.SlideID} in PowerPoint ${application.Build}`;
   });
 
-  // await delay(1000);
+  await delay(1000);
 
-  // await presentation.evaluate(({ application, presentation }) => {
-  //   const slide = presentation.Slides.Add(2, PpSlideLayout.ppLayoutBlank);
-  //   const textbox = slide.Shapes.AddTextbox(MsoTextOrientation.msoTextOrientationHorizontal, 100, 100, 600, 100);
-  //   textbox.TextFrame.TextRange.Text = `Hello World!`;
-  //   slide.Select();
-  // });
+  await presentation.evaluate(({ application, presentation }) => {
+    const slide = presentation.Slides.Add(2, PpSlideLayout.ppLayoutBlank);
+    const textbox = slide.Shapes.AddTextbox(MsoTextOrientation.msoTextOrientationHorizontal, 100, 100, 600, 100);
+    textbox.TextFrame.TextRange.Text = `Hello World!`;
+    slide.Select();
+  });
 
-  await presentation.click('SlideShowFromCurrent');
+  await delay(1000);
+  await presentation.click('SlideShowFromBeginning');
 
   await delay(3000);
 });

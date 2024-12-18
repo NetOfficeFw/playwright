@@ -1,7 +1,7 @@
 export interface PowerPointAppProvider {
   sessionId: string;
 
-  launch(): Promise<PowerPointApp>;
+  launch(filename: string | null): Promise<PowerPointApp>;
 
   connectOverGrpc(endpointURL: string): Promise<PowerPointApp>;
 }
@@ -12,7 +12,7 @@ export interface PowerPointApp {
 
   version(): string;
 
-  newPresentation(): Promise<Presentation | null>;
+  newPresentation(filename: string | null): Promise<Presentation | null>;
 
   close(): Promise<void>;
   [Symbol.asyncDispose](): Promise<void>;

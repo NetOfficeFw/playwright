@@ -3,7 +3,7 @@ import os from 'os';
 import path from 'path';
 import childProcess from 'child_process';
 
-import type * as api from "packages/playwright-mso-core/types";
+import type * as api from "./../../types";
 
 const EXECUTABLE_PATH = 'C:\\Program Files (x86)\\Microsoft Office\\root\\Office16\\POWERPNT.EXE';
 
@@ -25,12 +25,14 @@ export class PowerPointAppProviderImpl implements api.PowerPointAppProvider {
     return app;
   }
 
-  async launch(): Promise<api.PowerPointApp> {
+  async launch(filename: string | null): Promise<api.PowerPointApp> {
     const expectedRunningMessage = `NetOffice DevTools server running session ${this.sessionId}`;
+
+    const args = filename ? ['/O', filename] : ['/B'];
 
     // Make sure that the executable exists and is executable
     fs.accessSync(EXECUTABLE_PATH, fs.constants.X_OK);
-    const powerpointProcess = childProcess.spawn(`"${EXECUTABLE_PATH}"`, ['/B'], {
+    const powerpointProcess = childProcess.spawn(`"${EXECUTABLE_PATH}"`, args, {
       shell: true,
       env: {
         ...process.env,
@@ -85,8 +87,10 @@ class PowerPointApp implements api.PowerPointApp {
     return this.#version;
   }
 
-  async newPresentation(): Promise<api.Presentation | null> {
-    const newPresentationEndpoint = `${this.#endpoint}/newPresentation`;
+  async newPresentation(filename: string | null): Promise<api.Presentation | null> {
+    const query = filename ? `?filename=${encodeURIComponent(filename)}` : '';
+    const newPresentationEndpoint = `${this.#endpoint}/newPresentation${query}`;
+    console.log(newPresentationEndpoint);
     const response = await fetch(newPresentationEndpoint, { method: 'POST' });
     if (response.ok) {
       var data = await response.json();
